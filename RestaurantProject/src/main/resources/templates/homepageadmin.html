@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="@{/assets/css/homepageadmin.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/admin.css}"/>
     <link rel="icon" href="data:,">
     <title>Home Page Chef</title>
 </head>
@@ -21,7 +21,7 @@
             <div>HOME PAGE CHEF</div>
             <div>HOME PAGE THU NGÂN</div>
             <div>HOME PAGE</div>
-            <div>THOÁT</div>
+            <div  onclick="window.location.href='/login/signin'">THOÁT</div>
         </div>
     </div>
 </body>

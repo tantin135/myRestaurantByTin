@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="@{/assets/css/homepagecashier.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/homepagecashier.css}"/>
     <link rel="icon" href="data:,">
     <title>Home Page Chef</title>
 </head>
@@ -17,7 +17,7 @@
             <div>QUẢN LÝ SƠ ĐỒ BÀN</div>
             <div>THANH TOÁN</div>
             <div>BÁO CÁO DOANH THU</div>
-            <div>THOÁT</div>
+            <div  onclick="window.location.href='/login/signin'">THOÁT</div>
         </div>
     </div>
 </body>

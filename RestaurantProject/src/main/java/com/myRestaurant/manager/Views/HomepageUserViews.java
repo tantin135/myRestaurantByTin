@@ -5,21 +5,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/homepage")
-public class HomePageViews {
-	@GetMapping("/homepage-user")
+@RequestMapping("/homepage-user")
+public class HomepageUserViews{
+	@GetMapping("/choose-table")
 	public String userViews() {
-		return "homepage";
+		return "choosetable";
 	}
-	@GetMapping("/homepage-admin")
+	@GetMapping("/menu")
 	public String adminViews() {
 		return "homepageadmin";
 	}
-	@GetMapping("/homepage-cashier")
+	@GetMapping("/invoice")
 	public String cashierViews() {
 		return "homepagecashier";
 	}
-	@GetMapping("/homepage-chef")
+	@GetMapping("/points")
 	public String chefViews() {
 		return "homepagechef";
 	}

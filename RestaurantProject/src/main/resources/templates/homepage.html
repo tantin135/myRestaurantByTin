@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="@{/assets/css/homepage.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/homepage.css}"/>
     <link rel="icon" href="data:,">
 </head>
 <body>
@@ -20,11 +20,11 @@
                 <h1><b>HOME PAGE</b></h1>
             </div>
             <div class="bottom-home-page">
-                <div>CHỌN BÀN</div>
+                <div onclick="window.location.href='/homepage-user/choose-table'">CHỌN BÀN</div>
                 <div>XEM MENU</div>
                 <div>XEM HOÁ ĐƠN</div>
                 <div>TÍCH VÀ XEM ĐIỂM TÍCH LUỸ</div>
-                <div>LOG OUT</div>
+                <div onclick="window.location.href='/login/signin'">THOÁT</div>
             </div>
         </div>
         <div class = "clear-fix"></div>
