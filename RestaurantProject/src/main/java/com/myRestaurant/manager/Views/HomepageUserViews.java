@@ -13,7 +13,7 @@ public class HomepageUserViews{
 	}
 	@GetMapping("/menu")
 	public String adminViews() {
-		return "homepageadmin";
+		return "menu";
 	}
 	@GetMapping("/invoice")
 	public String cashierViews() {

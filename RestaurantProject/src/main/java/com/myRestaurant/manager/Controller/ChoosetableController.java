@@ -2,11 +2,14 @@ package com.myRestaurant.manager.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -72,5 +75,30 @@ public class ChoosetableController {
 	        return ResponseEntity.ok(tableDtos);
 	    }
 	    return ResponseEntity.notFound().build();
+	}
+	
+	@PostMapping("/update-table-status")
+	public ResponseEntity<ResponseData> updateTableStatus(@RequestBody Map<String, String> request) {
+	    String tableId = request.get("tableId");
+	    boolean isAvailable = Boolean.parseBoolean(request.get("isAvailable"));
+	    // Lấy thông tin bàn từ database
+	    TableEntities table = tableRepository.findById(tableId).orElse(null);
+	    if (table != null) {
+	        // Cập nhật trạng thái bàn
+	        table.setTableStatus(isAvailable);
+	        tableRepository.save(table);
+	        // Chuẩn bị dữ liệu trả về
+	        ResponseData responseData = new ResponseData();
+	        responseData.setStatus(200);
+	        responseData.setDescription("Table status updated successfully.");
+	        responseData.setData(table); // Gửi lại thông tin bàn
+	        return ResponseEntity.ok(responseData);
+	    }
+	    // Trả về lỗi nếu bàn không tồn tại
+	    ResponseData responseData = new ResponseData();
+	    responseData.setStatus(404);
+	    responseData.setDescription("Table not found.");
+	    responseData.setData(null);
+	    return ResponseEntity.status(404).body(responseData);
 	}
 }
