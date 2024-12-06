@@ -141,6 +141,7 @@ datalist{
     width: 70px;
     border-top: 2px solid black;
     text-align: center;
+    font-size: 11px;
 }
 .ordered{
     background-color: rgb(180, 178, 178);

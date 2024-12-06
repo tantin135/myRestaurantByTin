@@ -19,18 +19,14 @@
                 </div>
                 <!-- <input class = "area-list" type="text" list="area"> -->
                 <select id = "area" class = "area">
-                    <option value="Khu vực A">Khu vực A</option>
-                    <option value="Khu vực B">Khu vực B</option>
-                    <option value="Khu vực C">Khu vực C</option>
+                
                 </select>
             </div>
             <div class = "pick-table">
                 <div><b>Chọn bàn</b></div>
                 <!-- <input class = "table-list" type="text" list="table"> -->
                 <select id = "table" class = "table">
-                    <option value="B1">B1</option>
-                    <option value="B2">B2</option>
-                    <option value="B3">B3</option>
+                
                 </select>
             </div>
             <div class = "button">
@@ -72,5 +68,58 @@
             </div>
         </div>
     </div>
+    <script>
+	    document.addEventListener('DOMContentLoaded', function () {
+	        // Lấy danh sách khu vực từ API
+	        fetch('/choose-table')
+	            .then(response => response.json())
+	            .then(data => {
+	                const areaSelect = document.getElementById('area');
+	                data.forEach(area => {
+	                    const option = document.createElement('option');
+	                    option.value = area.area_id;
+	                    option.textContent = area.area_name;
+	                    areaSelect.appendChild(option);
+	                });
+	            })
+	            .catch(error => console.error('Error fetching areas:', error));
+	
+	        // Khi người dùng chọn khu vực
+	        document.getElementById('area').addEventListener('change', function () {
+	            const areaId = this.value;
+	
+	            // Gọi API để lấy danh sách bàn
+	            fetch(`/choose-table/tables-data/${areaId}`)
+	                .then(response => response.json())
+	                .then(data => {
+	                    // Cập nhật danh sách bàn trong dropdown
+	                    const tableSelect = document.getElementById('table');
+	                    tableSelect.innerHTML = ''; // Xóa các option cũ
+	                    data.forEach(table => {
+	                        const option = document.createElement('option');
+	                        option.value = table.table_id;
+	                        option.textContent = table.table_id;
+	                        tableSelect.appendChild(option);
+	                    });
+	
+	                    // Cập nhật danh sách bàn trong right-content
+	                    const tableScreen = document.querySelector('.table-screen');
+	                    tableScreen.innerHTML = ''; // Xóa nội dung cũ
+	                    data.forEach(table => {
+	                        const div = document.createElement('div');
+	                        div.innerHTML = `
+	                            <div>${table.table_id}</div>
+	                            <div class="div-bottom">${table.table_status ? 'Đang sử dụng' : 'Bàn trống'}</div>
+	                        `;
+	                        if (table.table_status) {
+	                            div.classList.add('ordered'); // Đánh dấu bàn đang sử dụng
+	                        }
+	                        tableScreen.appendChild(div);
+	                    });
+	                })
+	                .catch(error => console.error('Error fetching tables data:', error));
+	        });
+	    });
+    </script>
 </body>
 </html>
