@@ -22,18 +22,24 @@ public class TableService implements TableServiceImpl{
     
     @Override
     public TableEntities addTable(TableDto tableDto) {
-        // Convert DTO to Entity
+    	// Kiểm tra xem mã bàn đã tồn tại hay chưa
+        if (tableRepository.existsById(tableDto.getTable_id())) {
+            // Nếu đã tồn tại, ném ra một ngoại lệ hoặc trả về null để báo lỗi
+            throw new IllegalArgumentException("Mã bàn đã tồn tại.");
+        }
+
+        // Chuyển DTO thành Entity
         TableEntities tableEntity = new TableEntities();
         tableEntity.setTableId(tableDto.getTable_id());
         tableEntity.setTableStatus(tableDto.isTable_status());
-        tableEntity.setSeats(4);  // Assuming 4 seats by default, can be modified
+        tableEntity.setSeats(6);  // Mặc định số chỗ ngồi là 6
 
-        // Set the AreaEntity for the table
+        // Lấy khu vực từ AreaRepository
         AreaEntities areaEntities = areaRepository.findById(tableDto.getAreaDto().getArea_id()).orElse(null);
         if (areaEntities != null) {
             tableEntity.setAreaEntities(areaEntities);
         }
 
-        return tableRepository.save(tableEntity);  // Save to database
+        return tableRepository.save(tableEntity);  // Lưu bàn vào cơ sở dữ liệu
     }
 }

@@ -20,24 +20,25 @@ public class AddtableController {
     public ResponseEntity<?> addTable(@RequestBody TableDto tableDto) {
     	ResponseData responseData = new ResponseData();
         try {
-            // Add table to the database using the service
+            // Kiểm tra xem mã bàn đã tồn tại hay chưa
             TableEntities savedTable = tableService.addTable(tableDto);
-
-            // Prepare the response data
             responseData.setStatus(200);
             responseData.setDescription("Bàn đã được thêm thành công!");
             responseData.setData(savedTable);
+            return ResponseEntity.ok(responseData);  // Trả về kết quả thành công
 
-            return ResponseEntity.ok(responseData);  // Return the structured response
-
+        } catch (IllegalArgumentException e) {
+            // Nếu mã bàn đã tồn tại, trả về lỗi
+            responseData.setStatus(400);
+            responseData.setDescription("Mã bàn đã tồn tại.");
+            responseData.setData(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
         } catch (Exception e) {
-            // Handle errors and send a response with the error message
+            // Xử lý các lỗi khác
             responseData.setStatus(500);
             responseData.setDescription("Có lỗi xảy ra khi thêm bàn.");
-            responseData.setData(null);  // You can leave data as null in error cases
-
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                 .body(responseData);  // Return the error response with proper structure
+            responseData.setData(null);  // Dữ liệu là null khi có lỗi
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseData);
         }
     }
 }

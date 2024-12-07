@@ -125,7 +125,7 @@
                 loadTablesByArea(areaId);
             });
 
-            // Khi nhập ID bàn
+         // Khi nhập ID bàn và xác nhận thêm
             document.getElementById('table-id').addEventListener('change', function () {
                 const areaId = document.getElementById('area').value;
                 const tableId = this.value.trim();
@@ -163,7 +163,7 @@
                                 confirmationScreen.style.display = 'none';
                                 document.getElementById('table-id').value = '';  // Xóa ID bàn đã nhập
                             } else {
-                                alert('Có lỗi xảy ra khi thêm bàn.');
+                                alert(data.description || 'Có lỗi xảy ra khi thêm bàn.');
                             }
                         })
                         .catch(error => console.error('Error adding table:', error));
