@@ -46,6 +46,7 @@
 	                },
 	                success: function (msg) {
 	                    if (msg.data) {
+	                    	localStorage.setItem("fullname", msg.description);
 	                    	// Kiểm tra role_id và điều hướng
 	                        if (msg.role_Id === 0) {
 	                            window.location.href = '/homepage/homepage-user'; // Trang user

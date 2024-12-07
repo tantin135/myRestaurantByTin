@@ -38,6 +38,7 @@ public class LoginController {
 			UserDto user = loginServiceImpl.getUserByUsername(username);
 			responseData.setData(true);
 			responseData.setRole_Id(user.getRoleDto().getRole_id());
+			responseData.setDescription(user.getFullname());
 		}
 		else {
 			responseData.setData(false);
@@ -61,6 +62,14 @@ public class LoginController {
 		        responseData.setDescription("An unexpected error occurred. Please try again.");
 		        return new ResponseEntity<>(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
 		    }
+	}
+	@GetMapping("/current-user")
+	public ResponseEntity<UserDto> getCurrentUser(@RequestParam String username) {
+	    UserDto user = loginServiceImpl.getUserByUsername(username);
+	    if (user != null) {
+	        return ResponseEntity.ok(user);
+	    }
+	    return ResponseEntity.status(404).body(null);
 	}
 //	@GetMapping("/getalluser")
 //	public ResponseEntity<?> getAllUser(){
