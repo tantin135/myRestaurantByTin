@@ -18,4 +18,10 @@ public class TableDto {
 	public void setTable_status(boolean table_status) {
 		this.table_status = table_status;
 	}
+	public AreaDto getAreaDto() {
+		return areaDto;
+	}
+	public void setAreaDto(AreaDto areaDto) {
+		this.areaDto = areaDto;
+	}
 }

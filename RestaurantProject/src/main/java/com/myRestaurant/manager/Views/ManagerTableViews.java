@@ -11,4 +11,9 @@ public class ManagerTableViews {
 	public String deleteTableViews() {
 		return "deletetable";
 	}
+	
+	@GetMapping("/add-table")
+	public String addTableViews() {
+		return "addtable";
+	}
 }
