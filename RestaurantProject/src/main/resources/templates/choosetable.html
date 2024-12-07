@@ -9,91 +9,65 @@
 </head>
 <body>
     <div class="choose-table">
-        <div class = "left-content">
-            <div class = "table-code"><b>TABLE CODE: B2</b></div>
-            <div class = "choose-table-label">
+        <div class="left-content">
+            <div class="table-code"><b>TABLE CODE: B2</b></div>
+            <div class="choose-table-label">
                 <label for="">CHỌN BÀN</label>
             </div>
-            <div class = "pick-area">
-                <div><b>Chọn khu vực</b>
-                </div>
-                <!-- <input class = "area-list" type="text" list="area"> -->
-                <select id = "area" class = "area">
-                
-                </select>
+            <div class="pick-area">
+                <div><b>Chọn khu vực</b></div>
+                <select id="area" class="area"></select>
             </div>
-            <div class = "pick-table">
+            <div class="pick-table">
                 <div><b>Chọn bàn</b></div>
-                <!-- <input class = "table-list" type="text" list="table"> -->
-                <select id = "table" class = "table">
-                
-                </select>
+                <select id="table" class="table"></select>
             </div>
-            <div class = "button">
-                <div class = "confirm-button">Xác nhận</div>
-                <div class = "confirm-button" onclick="window.location.href='/homepage/homepage-user'">Thoát</div>
+            <div class="button">
+                <div class="confirm-button">Xác nhận</div>
+                <div class="confirm-button" onclick="window.location.href='/homepage/homepage-user'">Thoát</div>
             </div>
         </div>
         <div class="right-content">
-            <div class = "name-of-area"><b>KHU VỰC B</b></div>
-            <div class = "table-screen">
-                <div>
-                    <div>B1</div>
-                    <div class = "div-bottom">Bàn trống</div>
-                </div>
-                <div>
-                    <div>B2</div>
-                    <div class = "div-bottom">Bàn trống</div>
-                </div>
-                <div class = "ordered">
-                    <div>B3</div>
-                    <div class = "div-bottom">27'</div>
-                </div>
-                <div>
-                    <div>B4</div>
-                    <div class = "div-bottom">Bàn trống</div>
-                </div>
-                <div>
-                    <div>B5</div>
-                    <div class = "div-bottom">Bàn trống</div>
-                </div>
-                <div>
-                    <div>B6</div>
-                    <div class = "div-bottom">Bàn trống</div>
-                </div>
-                <div>
-                    <div>B7</div>
-                    <div class = "div-bottom">Bàn trống</div>
-                </div>
-            </div>
+            <div class="name-of-area"><b>KHU VỰC A</b></div>
+            <div class="table-screen"></div>
         </div>
     </div>
+
     <script>
 	    document.addEventListener('DOMContentLoaded', function () {
+	        const areaSelect = document.getElementById('area');
+	        const tableSelect = document.getElementById('table');
+	        const tableScreen = document.querySelector('.table-screen');
+	
 	        // Lấy danh sách khu vực từ API
 	        fetch('/choose-table')
 	            .then(response => response.json())
 	            .then(data => {
-	                const areaSelect = document.getElementById('area');
 	                data.forEach(area => {
 	                    const option = document.createElement('option');
 	                    option.value = area.area_id;
 	                    option.textContent = area.area_name;
 	                    areaSelect.appendChild(option);
 	                });
+	
+	                // Set khu vực mặc định là A
+	                areaSelect.value = 'A';
+	                loadTablesByArea('A'); // Tải bàn của khu vực A
 	            })
 	            .catch(error => console.error('Error fetching areas:', error));
 	
 	        // Khi người dùng chọn khu vực
-	        document.getElementById('area').addEventListener('change', function () {
+	        areaSelect.addEventListener('change', function () {
 	            const areaId = this.value;
+	            loadTablesByArea(areaId);
+	        });
 	
-	            // Gọi API để lấy danh sách bàn
+	        // Hàm tải danh sách bàn theo khu vực
+	        function loadTablesByArea(areaId) {
 	            fetch(`/choose-table/tables-data/${areaId}`)
 	                .then(response => response.json())
 	                .then(data => {
 	                    // Cập nhật danh sách bàn trong dropdown
-	                    const tableSelect = document.getElementById('table');
 	                    tableSelect.innerHTML = ''; // Xóa các option cũ
 	                    data.forEach(table => {
 	                        const option = document.createElement('option');
@@ -102,8 +76,7 @@
 	                        tableSelect.appendChild(option);
 	                    });
 	
-	                    // Cập nhật danh sách bàn trong right-content
-	                    const tableScreen = document.querySelector('.table-screen');
+	                    // Cập nhật danh sách bàn trong table-screen
 	                    tableScreen.innerHTML = ''; // Xóa nội dung cũ
 	                    data.forEach(table => {
 	                        const div = document.createElement('div');
@@ -118,12 +91,23 @@
 	                    });
 	                })
 	                .catch(error => console.error('Error fetching tables data:', error));
-	        });
+	        }
+	
+	        // Xử lý khi người dùng nhấn "Xác nhận"
 	        document.querySelector('.confirm-button').addEventListener('click', function () {
-	            const selectedTable = document.getElementById('table').value;
-
+	            const selectedTable = tableSelect.value;
+	
 	            if (selectedTable) {
-	                // Gửi yêu cầu cập nhật trạng thái bàn
+	                // Kiểm tra trạng thái của bàn trước khi xác nhận
+	                const selectedOption = tableSelect.options[tableSelect.selectedIndex];
+	                const tableStatus = selectedOption.textContent.includes("Đang sử dụng");
+	
+	                if (tableStatus) {
+	                    alert("Bàn đã được sử dụng, vui lòng chọn bàn khác.");
+	                    return; // Nếu bàn đã sử dụng thì không cho chọn
+	                }
+	
+	                // Gửi yêu cầu cập nhật trạng thái bàn thành "đang sử dụng"
 	                fetch('/choose-table/update-table-status', {
 	                    method: 'POST',
 	                    headers: { 'Content-Type': 'application/json' },
