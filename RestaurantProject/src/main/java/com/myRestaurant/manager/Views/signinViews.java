@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @CrossOrigin("*")
 @Controller
 @RequestMapping("/login")
-public class SigninViews {
+public class signinViews {
 	@GetMapping("/signin")
 	public String showLoginPage() {
 	    return "signin";
@@ -20,4 +20,5 @@ public class SigninViews {
 	public String signupPage() {
 		return "signup";
 	}
+	
 }
