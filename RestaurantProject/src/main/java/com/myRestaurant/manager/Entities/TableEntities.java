@@ -54,4 +54,3 @@ public class TableEntities {
         this.areaEntities = areaEntities;
     }
 }
-

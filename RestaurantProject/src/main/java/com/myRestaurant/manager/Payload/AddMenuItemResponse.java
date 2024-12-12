@@ -1,10 +1,12 @@
 package com.myRestaurant.manager.Payload;
 
+import java.math.BigDecimal;
+
 public class AddMenuItemResponse {
     private Integer dishId;
     private String dishName;
     private String dishType;
-    private int price;
+    private BigDecimal price;
     private String description;
     private String imagePath;
 
@@ -33,11 +35,11 @@ public class AddMenuItemResponse {
         this.dishType = dishType;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

@@ -3,7 +3,7 @@ package com.myRestaurant.manager.Controller;
 import com.myRestaurant.manager.Dto.MenuDto;
 import com.myRestaurant.manager.Payload.AddMenuItemResponse;
 import com.myRestaurant.manager.Payload.Request.AddMenuItemRequest;
-import com.myRestaurant.manager.Service.MenuService;
+import com.myRestaurant.manager.Service.AddMenuService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class AddMenuItemController {
 
     @Autowired
-    private MenuService menuService;
+    private AddMenuService menuService;
 
     @PostMapping("/add")
     public String addMenuItem(@ModelAttribute AddMenuItemRequest request,

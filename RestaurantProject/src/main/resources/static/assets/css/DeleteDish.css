@@ -4,14 +4,18 @@
     box-sizing: border-box;
 }
 
-body {
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
     background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
 }
-
+*{
+    box-sizing: border-box;
+}
 .container {
     display: flex;
     width: 950px;

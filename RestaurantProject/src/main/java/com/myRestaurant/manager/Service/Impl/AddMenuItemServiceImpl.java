@@ -5,7 +5,7 @@ import com.myRestaurant.manager.Entities.MenuEntities;
 import com.myRestaurant.manager.Entities.MenuEntities.DishType;
 import com.myRestaurant.manager.Payload.Request.AddMenuItemRequest;
 import com.myRestaurant.manager.Repository.MenuItemRepository;
-import com.myRestaurant.manager.Service.MenuService;
+import com.myRestaurant.manager.Service.AddMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 import java.sql.Timestamp;
 
 @Service
-public class AddMenuItemServiceImpl implements MenuService {
+public class AddMenuItemServiceImpl implements AddMenuService {
 
     private static final String IMAGE_UPLOAD_DIR = "src/main/resources/static/assets/img/";
 

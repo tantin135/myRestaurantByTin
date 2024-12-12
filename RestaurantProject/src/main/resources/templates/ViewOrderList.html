@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Mode - Danh Sách Gọi Món</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/ViewOrderList.css}"/>
+</head>
+<body>
+    <div class="main-screen">
+        <!-- Left bar -->
+        <div class="left-bar">
+            <div class="name-of-func"><b>XEM DANH SÁCH GỌI MÓN</b></div>
+            <div class="chef-infor">Thông tin CHEF</div>
+            <div class="details-inf">
+                <div class="chef-inf">Tên: </div>
+                <div class="shift-info"></div>
+            </div>
+            <div class="btn-func">
+                <div class="waiting">Đang chờ</div>
+                <div class="done">Đã xong</div>
+                <div class="exit" onclick="window.location.href='/homepage/homepage-chef'">Thoát</div>
+            </div>
+        </div>
+        
+        <!-- Right bar -->
+        <div class="right-bar">
+            <div class="dish-table">DANH SÁCH BÀN ĐANG GỌI MÓN</div>
+            <div class="table-screen">
+                <!-- Loop over each invoice -->
+                <div th:each="invoice : ${invoices}">
+				    <div class="table-item" onclick="window.location.href='/dishes/{tableId}'">
+				        <div class="table-id" th:text="${invoice.tableId}">Bàn</div>
+				        <div class="div-bottom">
+				            <span th:text="${invoice.minutesElapsed} + ' p'"></span>
+				        </div>
+				    </div>
+				</div>
+            </div>
+        </div>
+    </div>
+    <script>
+	    document.addEventListener('DOMContentLoaded', function () {
+	            const fullname = localStorage.getItem("fullname");
+	            if (fullname) {
+	                document.querySelector('.chef-inf').textContent = "Tên: " + fullname;
+	            }
+	
+	            const currentTime = new Date();
+	            const currentHour = currentTime.getHours();
+	            let shift = '';
+	            if (currentHour >= 6 && currentHour < 12) {
+	                shift = "Morning";
+	            } else if (currentHour >= 12 && currentHour < 18) {
+	                shift = "Afternoon";
+	            } else {
+	                shift = "Evening";
+	            }
+	            document.querySelector('.shift-info').textContent = "Shift: " + shift;
+	        });
+    </script>
+</body>
+</html>

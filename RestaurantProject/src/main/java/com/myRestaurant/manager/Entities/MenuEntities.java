@@ -1,5 +1,6 @@
 package com.myRestaurant.manager.Entities;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import jakarta.persistence.*;
 
@@ -8,6 +9,7 @@ public class MenuEntities {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "dish_id")
     private int dishId;
 
     @Column(name = "dish_name")
@@ -17,7 +19,7 @@ public class MenuEntities {
     private DishType dishType;
 
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
 
     @Column(name = "description")
     private String description;
@@ -69,11 +71,11 @@ public class MenuEntities {
         this.dishType = dishType;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

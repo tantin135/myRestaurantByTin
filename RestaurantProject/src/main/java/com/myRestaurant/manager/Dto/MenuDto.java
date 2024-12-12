@@ -1,12 +1,13 @@
 package com.myRestaurant.manager.Dto;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class MenuDto {
     private int dishId;
     private String dishName;
     private String dishType;
-    private int price;
+    private BigDecimal price;
     private String description;
     private String imagePath;
     private Timestamp createdAt;
@@ -37,11 +38,11 @@ public class MenuDto {
         this.dishType = dishType;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

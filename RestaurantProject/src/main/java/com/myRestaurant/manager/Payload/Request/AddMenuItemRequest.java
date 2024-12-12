@@ -1,9 +1,11 @@
 package com.myRestaurant.manager.Payload.Request;
 
+import java.math.BigDecimal;
+
 public class AddMenuItemRequest {
     private String dishName;
     private String dishType;
-    private int price;
+    private BigDecimal price;
     private String description;
 
     // Getters and Setters
@@ -23,11 +25,11 @@ public class AddMenuItemRequest {
         this.dishType = dishType;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
