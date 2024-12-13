@@ -1,32 +1,28 @@
-	package com.myRestaurant.manager.Dto;
-	
-	import java.sql.Timestamp;
-	
-	public class ViewOrderListDto {
+package com.myRestaurant.manager.Dto;
 
-	    private String tableId; // Table ID
-	    private long minutesElapsed; // Time elapsed since the order was placed (in minutes)
+public class ViewOrderListDto {
 
-	    // Constructor
-	    public ViewOrderListDto(String tableId, long minutesElapsed) {
-	        this.tableId = tableId;
-	        this.minutesElapsed = minutesElapsed;
-	    }
+    private String tableId;
+    private long minutesElapsed;
 
-	    // Getters and Setters
-	    public String getTableId() {
-	        return tableId;
-	    }
+    public ViewOrderListDto(String tableId, long minutesElapsed) {
+        this.tableId = tableId;
+        this.minutesElapsed = minutesElapsed;
+    }
 
-	    public void setTableId(String tableId) {
-	        this.tableId = tableId;
-	    }
+    public String getTableId() {
+        return tableId;
+    }
 
-	    public long getMinutesElapsed() {
-	        return minutesElapsed;
-	    }
+    public void setTableId(String tableId) {
+        this.tableId = tableId;
+    }
 
-	    public void setMinutesElapsed(long minutesElapsed) {
-	        this.minutesElapsed = minutesElapsed;
-	    }
-	}
+    public long getMinutesElapsed() {
+        return minutesElapsed;
+    }
+
+    public void setMinutesElapsed(long minutesElapsed) {
+        this.minutesElapsed = minutesElapsed;
+    }
+}

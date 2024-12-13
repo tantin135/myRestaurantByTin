@@ -25,11 +25,8 @@ public class ViewOrderListService {
             invoiceDTOs.add(new ViewOrderListDto(invoice.getTableId().getTableId(), minutesElapsed));
         }
 
-        // Sắp xếp theo minutesElapsed giảm dần
         invoiceDTOs.sort(Comparator.comparingLong(ViewOrderListDto::getMinutesElapsed).reversed());
 
         return invoiceDTOs;
     }
 }
-
-

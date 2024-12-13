@@ -11,7 +11,5 @@ import java.util.List;
 public interface ViewOrderListRepository extends CrudRepository<InvoiceEntities, Integer> {
 
     @Query("SELECT i FROM invoice i WHERE i.tableId IS NOT NULL")
-    List<InvoiceEntities> findAllWithTables();  // Ensure this matches the query
+    List<InvoiceEntities> findAllWithTables();
 }
-
-

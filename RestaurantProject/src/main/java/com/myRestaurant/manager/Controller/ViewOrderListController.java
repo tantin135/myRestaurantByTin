@@ -13,13 +13,12 @@ import java.util.List;
 public class ViewOrderListController {
 
     @Autowired
-    private ViewOrderListService invoiceService;
+    private ViewOrderListService viewOrderListService;
 
     @GetMapping("/chef/tables")
     public String getTables(Model model) {
-        List<ViewOrderListDto> invoices = invoiceService.getInvoicesWithTables();
+        List<ViewOrderListDto> invoices = viewOrderListService.getInvoicesWithTables();
         model.addAttribute("invoices", invoices);
-        return "ViewOrderList"; // The name of the HTML template
+        return "ViewOrderList";
     }
 }
-

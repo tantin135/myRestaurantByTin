@@ -1,10 +1,10 @@
 package com.myRestaurant.manager.Dto;
 
 public class DishOrderDto {
-    private int stt; // Số thứ tự
-    private String dishName;  // Tên món ăn
-    private int quantity;  // Số lượng món ăn
-    private String status;  // Trạng thái của món ăn (Đang chờ / Đã xong)
+    private int stt;
+    private String dishName;
+    private int quantity;
+    private String status;
 
     public DishOrderDto(int stt, String dishName, int quantity, String status) {
         this.stt = stt;

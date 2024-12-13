@@ -28,5 +28,3 @@ public class DishOrderRequest {
         this.status = status;
     }
 }
-
-
